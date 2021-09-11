@@ -30,10 +30,10 @@ public class TowerBlockPlacer {
     private void PlaceBlock(Arena arena, boolean ladder, Block b, String ladderdata, DyeColor color){
         //Block block = b.getRelative(x, y, z);
         //BlockPlacer blockPlacer = plugin.blockPlacer;
-
         if (!ladder) {
-            Material woolMat = Material.valueOf(color.name() + "_WOOL");
+            Material woolMat = Material.getMaterial(35);
             b.setType(woolMat);
+            b.setData(color.getWoolData());
         } else {
             b.setType(Material.LADDER);
 
