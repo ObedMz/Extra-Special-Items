@@ -9,6 +9,7 @@ import me.metallicgoat.specialItems.Main;
 import me.metallicgoat.specialItems.utils.XMaterial;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -48,6 +49,7 @@ public class IceBridgeUse {
 
 
                     if ((yaw < 45 || yaw >= 135) && (yaw < -135 || yaw >= -45)) {
+                        player.playSound(blockLoc, Sound.DIG_SNOW, Float.MAX_EXPONENT, Float.MAX_EXPONENT);
                         setIce(arena, world.getBlockAt(blockLoc.add(1, 0, 0)));
                         setIce(arena, world.getBlockAt(blockLoc.add(-1, 0, 0)));
                         setIce(arena, world.getBlockAt(blockLoc.add(2, 0, 0)));
@@ -56,6 +58,7 @@ public class IceBridgeUse {
                         setIce(arena, world.getBlockAt(blockLoc.add(-3, 0, 0)));
 
                     }else{
+                        player.playSound(blockLoc, Sound.DIG_SNOW, Float.MAX_EXPONENT, Float.MAX_EXPONENT);
                         setIce(arena, world.getBlockAt(blockLoc.add(0, 0, 1)));
                         setIce(arena, world.getBlockAt(blockLoc.add(0, 0, -1)));
                         setIce(arena, world.getBlockAt(blockLoc.add(0, 0, 2)));
@@ -79,8 +82,8 @@ public class IceBridgeUse {
     }
     private void setIce(Arena arena, Block block){
         if(arena.isInside(block.getLocation()) && block.getType() == Material.AIR){
-            assert XMaterial.ICE.parseMaterial() != null;
-            block.setType(XMaterial.ICE.parseMaterial());
+
+            block.setType(Material.PACKED_ICE);
             BukkitScheduler scheduler = plugin().getServer().getScheduler();
             scheduler.runTaskLater(plugin(), () -> {
                 if(arena.getStatus() == ArenaStatus.RUNNING) {
